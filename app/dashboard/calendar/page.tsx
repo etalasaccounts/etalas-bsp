@@ -79,7 +79,7 @@ export default async function CalendarPage() {
           <CardContent className="p-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-gray-600">Today's Events</p>
+                <p className="text-sm font-medium text-gray-600">Today&apos;s Events</p>
                 <p className="text-2xl font-bold text-gray-900">3</p>
               </div>
               <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
@@ -190,7 +190,7 @@ export default async function CalendarPage() {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Clock className="w-5 h-5 text-green-600" />
-                Today's Events
+                Today&apos;s Events
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
