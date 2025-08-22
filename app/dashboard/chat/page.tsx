@@ -167,11 +167,22 @@ export default function ChatPage() {
       <div className="w-80 border-r border-gray-200 bg-white flex flex-col flex-shrink-0 relative overflow-hidden">
         {/* Chat List Header - Fixed */}
         <div className="fixed left-80 top-0 w-80 z-30 p-4 border-b border-gray-200 bg-white shadow-sm">
+          {/* Search */}
+          <div className="relative mb-4">
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+            <input
+              type="text"
+              placeholder="Search for contact..."
+              className="w-full pl-10 pr-4 py-2.5 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+            />
+          </div>
+          
+          {/* Chats Section */}
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-xl font-semibold text-gray-900">Chats</h2>
+            <h2 className="text-lg font-semibold text-gray-900">Chats</h2>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
+                <Button variant="ghost" size="sm" className="h-8 w-8 p-0 hover:bg-gray-100">
                   <MoreVertical className="h-4 w-4" />
                 </Button>
               </DropdownMenuTrigger>
@@ -205,16 +216,6 @@ export default function ChatPage() {
               </DropdownMenuContent>
             </DropdownMenu>
           </div>
-          
-          {/* Search */}
-          <div className="relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
-            <input
-              type="text"
-              placeholder="Search for contact..."
-              className="w-full pl-10 pr-4 py-2.5 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
-            />
-          </div>
         </div>
 
         {/* Spacer untuk fixed header */}
@@ -226,29 +227,29 @@ export default function ChatPage() {
             {conversations.map((chat) => (
               <div
                 key={chat.id}
-                className={`group relative flex items-center p-3 hover:bg-gray-50 transition-colors cursor-pointer ${
-                  selectedConversation?.id === chat.id ? 'bg-gray-100' : ''
+                className={`group relative flex items-center p-4 hover:bg-gray-50 transition-all duration-200 cursor-pointer rounded-lg mx-2 my-1 ${
+                  selectedConversation?.id === chat.id ? 'bg-purple-50 border-l-4 border-l-purple-500' : ''
                 }`}
                 onClick={() => setSelectedConversation(chat)}
               >
                 <div className="relative">
-                  <Avatar className="h-12 w-12">
+                  <Avatar className="h-12 w-12 ring-2 ring-gray-100">
                     <AvatarImage src={chat.avatar} alt={chat.customerName} />
-                    <AvatarFallback className="bg-gray-300 text-gray-700 font-semibold">
+                    <AvatarFallback className="bg-gradient-to-br from-purple-400 to-purple-600 text-white font-semibold">
                       {chat.customerName.split(' ').map(n => n[0]).join('')}
                     </AvatarFallback>
                   </Avatar>
                 </div>
                 
-                <div className="flex-1 ml-3 min-w-0">
+                <div className="flex-1 ml-4 min-w-0">
                   <div className="flex items-start justify-between">
                     <div className="flex-1 min-w-0">
-                      <div className="flex items-center justify-between mb-1">
-                        <h3 className="text-sm font-medium text-gray-900 truncate">
+                      <div className="flex items-center justify-between mb-2">
+                        <h3 className="text-sm font-semibold text-gray-900 truncate">
                           {chat.customerName}
                         </h3>
-                        <div className="flex items-center gap-1">
-                          <span className="text-xs text-gray-500 flex-shrink-0">{chat.time}</span>
+                        <div className="flex items-center gap-2">
+                          <span className="text-xs text-gray-400 flex-shrink-0">{chat.time}</span>
                           
                           {/* Dropdown Menu untuk Actions */}
                           <DropdownMenu>
@@ -296,9 +297,9 @@ export default function ChatPage() {
                         </div>
                       </div>
                       <div className="flex items-center justify-between">
-                        <p className="text-sm text-gray-600 truncate pr-2">{chat.lastMessage}</p>
+                        <p className="text-sm text-gray-500 truncate pr-2">{chat.lastMessage}</p>
                         {chat.unread > 0 && (
-                          <Badge className="bg-green-500 text-white h-5 w-5 p-0 flex items-center justify-center text-xs rounded-full flex-shrink-0">
+                          <Badge className="bg-purple-500 text-white h-5 w-5 p-0 flex items-center justify-center text-xs rounded-full flex-shrink-0">
                             {chat.unread}
                           </Badge>
                         )}
@@ -326,15 +327,15 @@ export default function ChatPage() {
                   className="flex items-center gap-3 cursor-pointer hover:bg-gray-50 p-2 rounded-lg transition-colors"
                   onClick={toggleContactInfo}
                 >
-                  <Avatar className="h-10 w-10">
+                  <Avatar className="h-10 w-10 ring-2 ring-purple-100">
                     <AvatarImage src={selectedConversation.avatar} alt={selectedConversation.customerName} />
-                    <AvatarFallback className="bg-green-100 text-green-700 font-semibold">
+                    <AvatarFallback className="bg-gradient-to-br from-purple-400 to-purple-600 text-white font-semibold">
                       {selectedConversation.customerName.split(' ').map(n => n[0]).join('')}
                     </AvatarFallback>
                   </Avatar>
                   <div>
                     <h3 className="text-sm font-semibold text-gray-900">{selectedConversation.customerName}</h3>
-                    <p className="text-xs text-green-600">online</p>
+                    <p className="text-xs text-purple-600 font-medium">Next.js Developer</p>
                   </div>
                 </div>
                 
@@ -397,7 +398,7 @@ export default function ChatPage() {
                     <div className={`max-w-xs lg:max-w-2xl xl:max-w-4xl ${!message.fromCustomer ? 'text-right' : ''}`}>
                       <div className={`p-3 rounded-lg shadow-sm ${
                         !message.fromCustomer 
-                          ? 'bg-green-500 text-white rounded-br-sm' 
+                          ? 'bg-purple-500 text-white rounded-br-sm' 
                           : 'bg-white border border-gray-200 rounded-bl-sm'
                       }`}>
                         <p className="text-sm leading-relaxed">{message.content}</p>
@@ -432,7 +433,7 @@ export default function ChatPage() {
                     value={newMessage}
                     onChange={(e) => setNewMessage(e.target.value)}
                     placeholder="Type your message here..."
-                    className="pr-12 py-2 rounded-full border-gray-300 focus:ring-green-500 focus:border-green-500"
+                    className="pr-12 py-2 rounded-full border-gray-300 focus:ring-purple-500 focus:border-purple-500"
                     disabled={sending}
                   />
                   <Button type="button" variant="ghost" size="sm" className="absolute right-2 top-1/2 transform -translate-y-1/2 h-7 w-7 p-0 hover:bg-gray-100">
@@ -443,12 +444,12 @@ export default function ChatPage() {
                 <Button type="button" variant="ghost" size="sm" className="h-9 w-9 p-0 hover:bg-gray-100">
                   <Mic className="h-4 w-4" />
                 </Button>
-                <Button 
-                  type="submit" 
-                  size="sm" 
-                  className="h-9 w-9 p-0 bg-green-500 hover:bg-green-600 rounded-full" 
-                  disabled={sending || !newMessage.trim()}
-                >
+                                  <Button 
+                    type="submit" 
+                    size="sm" 
+                    className="h-9 w-9 p-0 bg-purple-500 hover:bg-purple-600 rounded-full" 
+                    disabled={sending || !newMessage.trim()}
+                  >
                   {sending ? (
                     <div className="animate-spin rounded-full h-4 w-4 border-2 border-white border-t-transparent"></div>
                   ) : (
