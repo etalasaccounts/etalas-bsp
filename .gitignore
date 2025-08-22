@@ -11,9 +11,8 @@ yarn-error.log*
 .env.test.local
 .env.production.local
 
-# Next.js - HAPUS SEMUA
+# Next.js
 .next/
-.next*
 out/
 build/
 dist/
@@ -112,11 +111,4 @@ jspm_packages/
 # Stores VSCode versions used for testing VSCode extensions
 .vscode-test
 
-# Next.js cache dan build files - JANGAN DIBAWA KE GIT
-.next/
-.next*
-out/
-build/
-dist/
-.vercel/
-*.tsbuildinfo
+# Next.js cache dan build files sudah didefinisikan di atas
