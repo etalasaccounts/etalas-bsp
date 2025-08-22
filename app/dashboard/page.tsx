@@ -291,7 +291,7 @@ export default async function DashboardPage() {
                   <Calendar className="w-5 h-5 text-white" />
                 </div>
                 <div>
-                  <p className="font-medium text-gray-900">Today's Messages</p>
+                  <p className="font-medium text-gray-900">Todays Messages</p>
                   <p className="text-sm text-gray-600">Pesan hari ini</p>
                 </div>
               </div>

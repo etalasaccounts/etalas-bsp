@@ -11,11 +11,13 @@ yarn-error.log*
 .env.test.local
 .env.production.local
 
-# Next.js
+# Next.js - HAPUS SEMUA
 .next/
+.next*
 out/
 build/
 dist/
+.vercel/
 
 # Production
 /build
@@ -33,9 +35,6 @@ yarn-error.log*
 
 # Local env files
 .env*.local
-
-# Vercel
-.vercel
 
 # TypeScript
 *.tsbuildinfo
@@ -98,15 +97,6 @@ jspm_packages/
 .cache
 .parcel-cache
 
-# next.js build output
-.next
-
-# nuxt.js build output
-.nuxt
-
-# vuepress build output
-.vuepress/dist
-
 # Serverless directories
 .serverless
 
@@ -121,3 +111,12 @@ jspm_packages/
 
 # Stores VSCode versions used for testing VSCode extensions
 .vscode-test
+
+# Next.js cache dan build files - JANGAN DIBAWA KE GIT
+.next/
+.next*
+out/
+build/
+dist/
+.vercel/
+*.tsbuildinfo
