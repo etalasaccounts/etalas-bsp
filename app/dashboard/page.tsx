@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Separator } from "@/components/ui/separator"
+import { DashboardSkeleton } from "@/components/skeletons/dashboard-skeleton"
 import { 
   MessageSquare, 
   Users, 
@@ -109,7 +110,7 @@ export default async function DashboardPage() {
   ]
 
   return (
-    <div className="space-y-8">
+    <div className="container mx-auto px-6 py-8 space-y-8">
       {/* Welcome Header */}
       <div className="relative overflow-hidden bg-gradient-to-r from-green-500 via-green-600 to-blue-600 rounded-2xl p-8 text-white">
         <div className="relative z-10">

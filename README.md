@@ -90,13 +90,31 @@ Atau jika Anda ingin menggunakan migration files:
 npx prisma migrate dev --name init
 ```
 
-#### Seed Database (Opsional)
+#### Seed Database dengan Data Default
 
-Jika Anda memiliki data seed:
+Jalankan seeder untuk membuat data percakapan default:
 
 ```bash
-npx prisma db seed
+npm run db:seed
 ```
+
+Atau jika ingin reset database dan seed ulang:
+
+```bash
+npm run db:reset
+```
+
+Atau setup database dari awal dengan seed:
+
+```bash
+npm run db:setup
+```
+
+**Data yang akan dibuat:**
+- 1 Admin user (admin@whatsappin.com / admin123)
+- 1 Workspace default
+- 5 Percakapan dengan pesan-pesan realistis
+- Notifikasi default
 
 ### 5. Jalankan Aplikasi
 
@@ -144,6 +162,11 @@ npm run lint
 
 # Generate Prisma client (otomatis dijalankan setelah npm install)
 npm run postinstall
+
+# Database seeding
+npm run db:seed          # Jalankan seeder
+npm run db:reset         # Reset database dan seed ulang
+npm run db:setup         # Setup database dari awal dengan seed
 ```
 
 ## 🔧 Prisma Commands

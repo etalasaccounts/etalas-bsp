@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState, useRef } from "react"
+import { useEffect, useState, useRef, useCallback } from "react"
 import { useParams } from "next/navigation"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -17,7 +17,8 @@ import {
   Clock,
   Check,
   CheckCheck,
-  User
+  User,
+  MessageCircle
 } from "lucide-react"
 import Link from "next/link"
 
@@ -48,21 +49,7 @@ export default function ConversationDetailPage() {
   const [sending, setSending] = useState(false)
   const scrollAreaRef = useRef<HTMLDivElement>(null)
 
-  useEffect(() => {
-    fetchConversation()
-    // Poll for new messages every 5 seconds
-    const interval = setInterval(fetchConversation, 5000)
-    return () => clearInterval(interval)
-  }, [conversationId])
-
-  useEffect(() => {
-    // Scroll to bottom when messages change
-    if (scrollAreaRef.current) {
-      scrollAreaRef.current.scrollTop = scrollAreaRef.current.scrollHeight
-    }
-  }, [conversation?.messages])
-
-  async function fetchConversation() {
+  const fetchConversation = useCallback(async () => {
     try {
       const response = await fetch(`/api/conversations/${conversationId}`)
       if (response.ok) {
@@ -72,7 +59,21 @@ export default function ConversationDetailPage() {
     } catch (error) {
       console.error("Error fetching conversation:", error)
     }
-  }
+  }, [conversationId])
+
+  useEffect(() => {
+    fetchConversation()
+    // Poll for new messages every 5 seconds
+    const interval = setInterval(fetchConversation, 5000)
+    return () => clearInterval(interval)
+  }, [fetchConversation])
+
+  useEffect(() => {
+    // Scroll to bottom when messages change
+    if (scrollAreaRef.current) {
+      scrollAreaRef.current.scrollTop = scrollAreaRef.current.scrollHeight
+    }
+  }, [conversation?.messages])
 
   async function sendMessage(e: React.FormEvent) {
     e.preventDefault()
